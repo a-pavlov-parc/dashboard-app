@@ -37,7 +37,7 @@ export class DashboardReset implements Action {
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type UserActions = [
+export type DashboardActions = [
   DashboardSetQuantitOfCharts,
   DashboardReset
 ];
