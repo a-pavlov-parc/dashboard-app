@@ -1,0 +1,4 @@
+<form [formGroup]="form" (submit)="submitTheForm()">
+  <input type="number" formControlName="qtyOfCharts">
+  <button [disabled]="form.invalid">Submit</button>
+</form>
