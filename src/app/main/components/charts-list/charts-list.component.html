@@ -1,0 +1,3 @@
+<ng-container *ngFor="let item of charts; let index = index">
+  <app-chart [color]="colors[index % colors.length]"></app-chart>
+</ng-container>

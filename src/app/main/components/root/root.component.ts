@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { IFormValue } from '../form/form.component';
 import { DashboardService } from '@main/services/dashboard.service';
+import { IChart } from '@main/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { DashboardService } from '@main/services/dashboard.service';
   styleUrls: ['./root.component.css']
 })
 export class RootComponent {
-  quantityOfCharts$: Observable<number> = this.dashboardService.quantityOfCharts$;
+  charts$: Observable<IChart> = this.dashboardService.displayedCharts$;
 
   constructor(private dashboardService: DashboardService) {}
 

@@ -9,6 +9,8 @@ import './operators';
 // components
 import { RootComponent } from './components/root/root.component';
 import { FormComponent } from './components/form/form.component';
+import { ChartsListComponent } from './components/charts-list/charts-list.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 // providers
 import { DashboardService } from './services/dashboard.service';
@@ -31,7 +33,9 @@ import { mainModuleReducers, mainModuleInitialState } from './state';
   ],
   declarations: [
     RootComponent,
-    FormComponent
+    FormComponent,
+    ChartsListComponent,
+    ChartComponent
   ],
   providers: [DashboardService],
   bootstrap: [RootComponent]
