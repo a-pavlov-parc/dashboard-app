@@ -9,6 +9,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RootComponent } from './components/root/root.component';
 import { FormComponent } from './components/form/form.component';
 
+// providers
+import { DashboardService } from './services/dashboard.service';
+
 // ngrx related things
 import { DashboardEffects } from './state/effects/dashboard.effects';
 import { mainModuleReducers, mainModuleInitialState } from './state';
@@ -29,7 +32,7 @@ import { mainModuleReducers, mainModuleInitialState } from './state';
     RootComponent,
     FormComponent
   ],
-  providers: [],
+  providers: [DashboardService],
   bootstrap: [RootComponent]
 })
 export class MainModule {}

@@ -20,7 +20,7 @@ export const mainModuleReducers: ActionReducerMap<MainModuleState> = {
 };
 
 // main selectors
-export const getDashboardState = (state) => state.MainModule.dashboard;
+export const getDashboardState = (state) => state.dashboard;
 
 // selectors
 export const getQuantityOfCharts = createSelector(getDashboardState, (state: fromDashboardReducer.IDashboardState) => state.quantityOfCharts);

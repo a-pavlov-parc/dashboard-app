@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
   submitTheForm() {
     if (this.form.valid) {
       this.formSubmitted.emit(this.form.value as IFormValue);
+      this.form.reset();
     }
   }
 }
