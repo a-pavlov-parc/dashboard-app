@@ -1,10 +1,4 @@
-:host {
-  display: inline-block;
-  height: 300px;
-  width: 33%;
-}
-
 .chart {
-  height: 100%;
-  width: 100%;
+  display: inline-block;
+  width: 33%;
 }

@@ -8,8 +8,7 @@ import * as uuid from 'uuid/v1';
 import * as fromDashboardActions from '../actions/dashboard.actions';
 import { DashboardService } from '@main/services/dashboard.service';
 import { IChart } from '@main/interfaces';
-
-const quantityOfChartsToDisplayPerPage = 3;
+import { heightOfAChart, quantityOfChartsToDisplayPerRow } from '@main/main.constants';
 
 @Injectable()
 export class DashboardEffects {
@@ -38,7 +37,9 @@ export class DashboardEffects {
       return this.dashboardService.allCharts$
         .take(1)
         .map((charts: IChart[]) => {
-          return new fromDashboardActions.DashboardDisplayMoreChartsSuccess(charts.slice(0, quantityOfChartsToDisplayPerPage));
+          const quantityOfChartsToDisplay = Math.ceil(window.innerHeight / heightOfAChart) * quantityOfChartsToDisplayPerRow;
+
+          return new fromDashboardActions.DashboardDisplayMoreChartsSuccess(charts.slice(0, quantityOfChartsToDisplay));
         });
     });
 
@@ -52,7 +53,7 @@ export class DashboardEffects {
         .take(1)
         .map(([allCharts, displayedCharts]: IChart[][]) => {
           const quantityOfDisplayedCharts: number = displayedCharts.length;
-          const chartsToDisplay: IChart[] = allCharts.slice(quantityOfDisplayedCharts, quantityOfDisplayedCharts + quantityOfChartsToDisplayPerPage);
+          const chartsToDisplay: IChart[] = allCharts.slice(quantityOfDisplayedCharts, quantityOfDisplayedCharts + quantityOfChartsToDisplayPerRow);
 
           return new fromDashboardActions.DashboardDisplayMoreChartsSuccess(chartsToDisplay);
         });
