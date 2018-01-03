@@ -17,4 +17,8 @@ export class RootComponent {
   formSubmitted(value: IFormValue) {
     this.dashboardService.setQuantityOfCharts(value.qtyOfCharts);
   }
+
+  displayMoreCharts() {
+    this.dashboardService.displayMoreCharts();
+  }
 }
