@@ -11,7 +11,9 @@ import { IChart } from '@main/interfaces';
   styleUrls: ['./root.component.css']
 })
 export class RootComponent {
-  charts$: Observable<IChart> = this.dashboardService.displayedCharts$;
+  charts$: Observable<IChart[]> = this.dashboardService.displayedCharts$;
+  chartsAreBeingLoaded$: Observable<boolean> = this.dashboardService.chartsAreBeingLoaded$;
+  thereIsTheNextPage$: Observable<boolean> = this.dashboardService.thereIsTheNextPage$;
 
   constructor(private dashboardService: DashboardService) {}
 

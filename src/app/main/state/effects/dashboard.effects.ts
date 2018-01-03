@@ -51,11 +51,13 @@ export class DashboardEffects {
         this.dashboardService.displayedCharts$
       )
         .take(1)
-        .map(([allCharts, displayedCharts]: IChart[][]) => {
+        .switchMap(([allCharts, displayedCharts]: IChart[][]) => {
           const quantityOfDisplayedCharts: number = displayedCharts.length;
           const chartsToDisplay: IChart[] = allCharts.slice(quantityOfDisplayedCharts, quantityOfDisplayedCharts + quantityOfChartsToDisplayPerRow);
 
-          return new fromDashboardActions.DashboardDisplayMoreChartsSuccess(chartsToDisplay);
+          return Observable
+            .of(new fromDashboardActions.DashboardDisplayMoreChartsSuccess(chartsToDisplay))
+            .delay(1000); // emulate http loading...
         });
     });
 }

@@ -1,3 +1,13 @@
-<ng-container *ngFor="let item of charts; let index = index">
-  <app-chart [color]="colors[index % colors.length]"></app-chart>
-</ng-container>
+<div infiniteScroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="50"
+     [infiniteScrollDisabled]="chartsAreBeingLoaded || !thereIsTheNextPage"
+     (scrolled)="displayMoreCharts.emit()">
+  <ng-container *ngFor="let item of charts; let index = index; trackBy: itemTrackByUuid;">
+    <app-chart [color]="colors[index % colors.length]"></app-chart>
+  </ng-container>
+
+  <ng-container *ngIf="chartsAreBeingLoaded">
+    <app-spinner></app-spinner>
+  </ng-container>
+</div>

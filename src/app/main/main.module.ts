@@ -4,6 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
+// modules
+import { SharedModule } from '@shared/shared.module';
+
+// rxjs operators
 import './operators';
 
 // components
@@ -30,6 +36,8 @@ import { mainModuleReducers, mainModuleInitialState } from './state';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
+    InfiniteScrollModule,
+    SharedModule
   ],
   declarations: [
     RootComponent,

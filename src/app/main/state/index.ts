@@ -26,4 +26,5 @@ export const getDashboardState = (state) => state.dashboard;
 export const getQuantityOfCharts = createSelector(getDashboardState, (state: fromDashboardReducer.IDashboardState) => state.quantityOfCharts);
 export const getAllCharts = createSelector(getDashboardState, (state: fromDashboardReducer.IDashboardState) => state.allCharts);
 export const getDisplayedCharts = createSelector(getDashboardState, (state: fromDashboardReducer.IDashboardState) => state.displayedCharts);
+export const getChartsAreBeingLoaded = createSelector(getDashboardState, (state: fromDashboardReducer.IDashboardState) => state.chartsAreBeingLoaded);
 

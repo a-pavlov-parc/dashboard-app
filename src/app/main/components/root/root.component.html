@@ -1,5 +1,8 @@
 <app-form (formSubmitted)="formSubmitted($event)"></app-form>
 
-<button (click)="displayMoreCharts()">Display more charts</button>
-
-<app-charts-list [charts]="charts$ | async"></app-charts-list>
+<app-charts-list
+  [charts]="charts$ | async"
+  [chartsAreBeingLoaded]="chartsAreBeingLoaded$ | async"
+  [thereIsTheNextPage]="thereIsTheNextPage$ | async"
+  (displayMoreCharts)="displayMoreCharts()">
+</app-charts-list>

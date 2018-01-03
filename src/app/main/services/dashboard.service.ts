@@ -11,8 +11,13 @@ export class DashboardService {
   quantityOfCharts$: Observable<number> = this.store.select(fromMainModuleState.getQuantityOfCharts);
   allCharts$: Observable<IChart[]> = this.store.select(fromMainModuleState.getAllCharts);
   displayedCharts$: Observable<IChart[]> = this.store.select(fromMainModuleState.getDisplayedCharts);
+  chartsAreBeingLoaded$: Observable<boolean> = this.store.select(fromMainModuleState.getChartsAreBeingLoaded);
+  thereIsTheNextPage$: Observable<boolean>;
 
-  constructor(private store: Store<fromMainModuleState.MainModuleState>) {}
+  constructor(private store: Store<fromMainModuleState.MainModuleState>) {
+    this.thereIsTheNextPage$ = Observable.combineLatest(this.allCharts$, this.displayedCharts$)
+      .map(([allCharts, displayedCharts]: IChart[][]) => allCharts.length > displayedCharts.length);
+  }
 
   setQuantityOfCharts(quantity: number) {
     this.store.dispatch(new dashboardActions.DashboardSetQuantitOfCharts(quantity));

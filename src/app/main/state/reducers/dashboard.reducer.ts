@@ -5,12 +5,14 @@ export interface IDashboardState {
   quantityOfCharts: number;
   allCharts: IChart[];
   displayedCharts: IChart[];
+  chartsAreBeingLoaded: boolean;
 }
 
 export const initialDashboardStoreState: IDashboardState = {
   quantityOfCharts: null,
   allCharts: [],
-  displayedCharts: []
+  displayedCharts: [],
+  chartsAreBeingLoaded: false
 };
 
 export function dashboardReducer(state: IDashboardState = initialDashboardStoreState, action): IDashboardState {
@@ -28,9 +30,16 @@ export function dashboardReducer(state: IDashboardState = initialDashboardStoreS
       });
     }
 
+    case dashboardActionTypes.DASHBOARD_DISPLAY_MORE_CHARTS: {
+      return Object.assign({}, state, {
+        chartsAreBeingLoaded: true
+      });
+    }
+
     case dashboardActionTypes.DASHBOARD_DISPLAY_MORE_CHARTS_SUCCESS: {
       return Object.assign({}, state, {
-        displayedCharts: [...state.displayedCharts, ...action.payload]
+        displayedCharts: [...state.displayedCharts, ...action.payload],
+        chartsAreBeingLoaded: false
       });
     }
 
