@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import { dashboardActionTypes } from '../actions/dashboard.actions';
 import { IChart } from '@main/interfaces';
 
@@ -16,39 +18,43 @@ export const initialDashboardStoreState: IDashboardState = {
 };
 
 export function dashboardReducer(state: IDashboardState = initialDashboardStoreState, action): IDashboardState {
-  switch (action.type) {
-    case dashboardActionTypes.DASHBOARD_SET_QUANTITY_OF_CHARTS: {
-      return Object.assign({}, state, {
-        quantityOfCharts: action.payload
-      });
-    }
+  return produce(state, (draft: IDashboardState) => {
+    switch (action.type) {
+      case dashboardActionTypes.DASHBOARD_SET_QUANTITY_OF_CHARTS: {
+        draft.quantityOfCharts = action.payload;
 
-    case dashboardActionTypes.DASHBOARD_GENERATE_CHARTS: {
-      return Object.assign({}, state, {
-        allCharts: action.payload,
-        displayedCharts: []
-      });
-    }
+        break;
+      }
 
-    case dashboardActionTypes.DASHBOARD_DISPLAY_MORE_CHARTS: {
-      return Object.assign({}, state, {
-        chartsAreBeingLoaded: true
-      });
-    }
+      case dashboardActionTypes.DASHBOARD_GENERATE_CHARTS: {
+        draft.allCharts = action.payload;
+        draft.displayedCharts = [];
 
-    case dashboardActionTypes.DASHBOARD_DISPLAY_MORE_CHARTS_SUCCESS: {
-      return Object.assign({}, state, {
-        displayedCharts: [...state.displayedCharts, ...action.payload],
-        chartsAreBeingLoaded: false
-      });
-    }
+        break;
+      }
 
-    case dashboardActionTypes.DASHBOARD_RESET: {
-      return initialDashboardStoreState;
-    }
+      case dashboardActionTypes.DASHBOARD_DISPLAY_MORE_CHARTS: {
+        draft.chartsAreBeingLoaded = true;
 
-    default: {
-      return state;
+        break;
+      }
+
+      case dashboardActionTypes.DASHBOARD_DISPLAY_MORE_CHARTS_SUCCESS: {
+        draft.displayedCharts = [...draft.displayedCharts, ...action.payload];
+        draft.chartsAreBeingLoaded = false;
+
+        break;
+      }
+
+      case dashboardActionTypes.DASHBOARD_RESET: {
+        draft = initialDashboardStoreState;
+
+        break;
+      }
+
+      default: {
+        return draft;
+      }
     }
-  }
+  });
 }
